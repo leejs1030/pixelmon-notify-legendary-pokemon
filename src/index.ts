@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
+import 'dotenv/config';
 import { createReadStream, statSync } from 'node:fs';
-
-dotenv.config();
 
 const logFileName = process.env.LOG_FILE_NAME;
 
