@@ -1,17 +1,19 @@
 import 'dotenv/config';
-import { createReadStream, statSync } from 'node:fs';
+import { spawn } from 'node:child_process';
 
 const logFileName = process.env.LOG_FILE_NAME;
 
-const main = async () => {
-  const logStream = createReadStream(logFileName, {
-    encoding: 'utf8',
-    start: statSync(logFileName).size,
-  });
+const dockerLogs = spawn('tail', ['-n 1', '-f', logFileName]);
 
-  logStream.on('data', (data) => {
-    console.log(data);
-  });
-};
+dockerLogs.stdout.on('data', (data) => {
+  const logData = data.toString();
+  console.log(logData);
 
-main();
+  if (
+    logData.includes(
+      '[Server thread/INFO] [minecraft/MinecraftServer]: Spawned ',
+    )
+  ) {
+    console.log('hello');
+  }
+});
