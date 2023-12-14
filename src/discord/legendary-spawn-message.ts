@@ -11,8 +11,9 @@ export const isLegendarySpawnMessage = (data: string) => {
 export const buildLegendarySpawnMessage = (data: string) => {
   const { legendaryName, x, y, z } = regexp.exec(data)?.groups;
   const koreanName = language[`pixelmon.${legendaryName.toLowerCase()}`];
+  const name = koreanName || legendaryName;
 
-  return `${koreanName} 가 ${x} ${y} ${z} 에 스폰됨`;
+  return `${name} 가 ${x} ${y} ${z} 에 스폰됨`;
 };
 
 export const sendLegendarySpawnMessage = async (data: string) => {
