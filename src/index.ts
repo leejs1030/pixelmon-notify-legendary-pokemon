@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process';
 
 const logFileName = process.env.LOG_FILE_NAME;
 
-const dockerLogs = spawn('tail', ['-n 1', '-f', logFileName]);
+const dockerLogs = spawn('tail', ['-n 0', '-f', logFileName]);
 
 dockerLogs.stdout.on('data', (data) => {
   const logData = data.toString();
