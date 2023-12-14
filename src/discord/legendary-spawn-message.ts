@@ -1,4 +1,5 @@
 import { sendMessage } from './send-message';
+import language from '../assets/lang/ko_kr.json';
 
 export const regexp =
   /Spawned (?<legendaryName>\w+) at.* x:(?<x>(-\d+|\d+)), y:(?<y>(-\d+|\d+)), z:(?<z>(-\d+|\d+))/;
@@ -9,7 +10,10 @@ export const isLegendarySpawnMessage = (data: string) => {
 
 export const buildLegendarySpawnMessage = (data: string) => {
   const { legendaryName, x, y, z } = regexp.exec(data)?.groups;
-  return `${legendaryName} 가 ${x} ${y} ${z} 에 스폰됨`;
+  const koreanLegendaryName =
+    language[`pixelmon.${legendaryName}`] || legendaryName;
+
+  return `${koreanLegendaryName} 가 ${x} ${y} ${z} 에 스폰됨`;
 };
 
 export const sendLegendarySpawnMessage = async (data: string) => {
