@@ -2,7 +2,7 @@ import { sendMessage } from './send-message';
 import language from '../assets/lang/ko_kr.json';
 
 export const regexp =
-  /Spawned (?<legendaryName>\w+) at.* x:(?<x>(-\d+|\d+)), y:(?<y>(-\d+|\d+)), z:(?<z>(-\d+|\d+))/;
+  /Spawned (?<legendaryName>(\w|\s|-)+) at.* x:(?<x>(-\d+|\d+)), y:(?<y>(-\d+|\d+)), z:(?<z>(-\d+|\d+))/;
 
 export const isLegendarySpawnMessage = (data: string) => {
   return regexp.test(data);
